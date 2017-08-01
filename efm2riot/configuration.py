@@ -313,5 +313,24 @@ BOARDS = [
             "ulfrco": 1000
         },
         "marketing_name": "EFM32 Wonder Gecko Starter Kit"
+    },
+    {
+        "cpu": "efr32mg12p332f1024gl125",
+        "cpu_datasheet": "https://www.silabs.com/documents/public/data-sheets/efr32mg12-datasheet.pdf",
+        "board": "brd4162a",
+        "board_manual": "https://www.silabs.com/documents/public/reference-manuals/brd4162a-rm.pdf",
+        "board_schematic": "https://www.silabs.com/documents/public/reference-manuals/brd4162a-rm.pdf",
+        "family": "efr32mg12p",
+        "family_full_name": "EFM32 Mighty Gecko 12P",
+        "family_manual": "http://www.silabs.com/Support%20Documents/TechnicalDocs/EFR32-ReferenceManual.pdf",  # noqa
+        "freq": {
+            "hfxo": 38400000,
+            "hfrco": 14000000,
+            "lfxo": 32768,
+            "lfrco": 32768,
+            "ulfrco": 1000
+        },
+        "marketing_name": "Mighty Gecko Dev Board"
     }
+
 ]
