@@ -180,11 +180,30 @@ def parse_cpus(sdk_directory, svds_directory, family):
     re_hex = re.compile(r".*(0x[a-fA-F0-9]+).*")
     re_irq = re.compile(r"\s*([a-zA-Z0-9_]+)\s* = (-?\d+).*")
 
+    includes = glob.glob(os.path.join(
+        sdk_directory,
+        "Device/SiliconLabs/%(family_display_name)s/Include/*.h" % family)) + glob.glob(
+            os.path.join(
+                sdk_directory,
+                "Device/SiliconLabs/%(family_display_name)s/Source/system_*.c" % family)
+        )
     cpus = []
 
     includes = glob.glob(os.path.join(
         sdk_directory,
         "Device/SiliconLabs/%s/Include/*.h" % family["family"].upper()))
+
+    # old version, possible need for radio support?
+#    includes = glob.glob(os.path.join(
+#        sdk_directory,
+#        "Device/SiliconLabs/%(family_display_name)s/Include/*.h" % family)) + 
+#        glob.glob(
+#            os.path.join(
+#                sdk_directory,
+#                "Device/SiliconLabs/%(family_display_name)s/Source/system_*.c" 
+#                % family)
+#        )
+
 
     for include in includes:
         # Only looking for device header files.
@@ -256,6 +275,7 @@ def parse_cpus(sdk_directory, svds_directory, family):
             architecture = "m4f"
             architecture_short = "m4f"
 
+<<<<<<< HEAD
         cpu_name = os.path.basename(include).split(".")[0]
 
         cpu = {
@@ -273,6 +293,74 @@ def parse_cpus(sdk_directory, svds_directory, family):
         # Sanity checks: CPUs in same family must have the same
         # characteristics.
         check = ["fpu", "mpu", "architecture", "cpu_series"]
+ # possible needed for radio?       
+#        for number in range(max_irq + 1):
+#            
+#            irq_name = ""
+#            method_name = ""
+#            reserved = True
+#            
+#            if number in irqs:
+#                name = irqs[number]
+#
+#                irq_name = name.replace("_IRQn", "")
+#                method_name = "isr_" + irq_name.lower()
+#                reserved    = False
+#
+#                # add radio irq if platform supports a radio transceiver
+#            elif number == 1 and radio == True:
+#                irq_name    = "FRC_PRI"
+#                method_name = "FRC_PRI_IRQHandler"
+#                reserved    = False
+#            elif number == 3 and radio == True:
+#                irq_name    = "FRC"
+#                method_name = "FRC_IRQHandler"
+#                reserved    = False
+#            elif number == 4 and radio == True:
+#                irq_name    = "MODEM"
+#                method_name = "MODEM_IRQHandler"
+#                reserved    = False
+#            elif number == 5 and radio == True:
+#                irq_name    = "RAC_SEQ"
+#                method_name = "RAC_SEQ_IRQHandler"
+#                reserved    = False
+#            elif number == 6 and radio == True:
+#                irq_name    = "RAC_RSM"
+#                method_name = "RAC_RSM_IRQHandler"
+#                reserved    = False
+#            elif number == 7 and radio == True:
+#                irq_name    = "BUFC"
+#                method_name = "BUFC_IRQHandler"
+#                reserved    = False
+#            elif number == 27 and radio == True:
+#                irq_name    = "AGC"
+#                method_name = "AGC_IRQHandler"
+#                reserved    = False
+#            elif number == 28 and radio == True:
+#                irq_name    = "PROTIMER"
+#                method_name = "PROTIMER_IRQHandler"
+#                reserved    = False
+#            elif number == 30 and radio == True:
+#                irq_name    = "SYNTH"
+#                method_name = "SYNTH_IRQHandler"
+#                reserved    = False
+#            elif number == 32 and radio == True:
+#                irq_name    = "RFSENSE"
+#                method_name = "RFSENSE_IRQHandler"
+#                reserved    = False
+#            
+#            if reserved == True:
+#                irq_table.append({
+#                    "reserved": True
+#                })
+#            else:
+#                irq_table.append({
+#                    "reserved": False,
+#                    "method_name": method_name,
+#                    "name": irq_name,
+#                    "number": number
+#                })
+#
 
         for key in check:
             if key in family:
