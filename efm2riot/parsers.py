@@ -180,13 +180,6 @@ def parse_cpus(sdk_directory, svds_directory, family):
     re_hex = re.compile(r".*(0x[a-fA-F0-9]+).*")
     re_irq = re.compile(r"\s*([a-zA-Z0-9_]+)\s* = (-?\d+).*")
 
-    includes = glob.glob(os.path.join(
-        sdk_directory,
-        "Device/SiliconLabs/%(family_display_name)s/Include/*.h" % family)) + glob.glob(
-            os.path.join(
-                sdk_directory,
-                "Device/SiliconLabs/%(family_display_name)s/Source/system_*.c" % family)
-        )
     cpus = []
 
     includes = glob.glob(os.path.join(
@@ -275,7 +268,6 @@ def parse_cpus(sdk_directory, svds_directory, family):
             architecture = "m4f"
             architecture_short = "m4f"
 
-<<<<<<< HEAD
         cpu_name = os.path.basename(include).split(".")[0]
 
         cpu = {
